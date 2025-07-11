@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Gender;
+use App\Entity\Product;
+use App\Entity\Style;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -32,5 +34,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToRoute('Retour sur le site', 'fa fa-home', 'app_home');
         yield MenuItem::linkToCrud('Genre', 'fas fa-venus-mars', Gender::class);
+        yield MenuItem::linkToCrud('Style', 'fas fa-vest', Style::class);
+        yield MenuItem::linkToCrud('Produit', 'fas fa-shoe-prints', Product::class);
     }
 }
