@@ -1,0 +1,31 @@
+.logo{
+    width: 50px;
+    height: auto;
+}
+
+.bg-jordan{
+    background-color: #0a0a0a;
+}
+
+.btn-jordan{
+    background-color: #DC143C;
+    color: #fff;
+}
+
+.border-jordan{
+    border-color: #DC143C;
+    border-radius: 30px;
+    border-width: 2px;
+}
+
+.color-jordan{
+    color: #FFFFFF;
+}
+
+.color-jordan:hover{
+    color: #DC143C;
+}
+
+.color-jordan-form{
+    color: #DC143C;
+}
