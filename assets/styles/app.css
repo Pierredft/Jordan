@@ -26,6 +26,27 @@
     color: #DC143C;
 }
 
+/* Styles spécifiques pour le dropdown */
+.dropdown-menu.color-jordan {
+    background-color: #0a0a0a;
+    border-color: #DC143C;
+    border-width: 2px;
+}
+
+.dropdown-menu.color-jordan .dropdown-item {
+    color: #FFFFFF;
+}
+
+.dropdown-menu.color-jordan .dropdown-item:hover,
+.dropdown-menu.color-jordan .dropdown-item:focus {
+    color: #DC143C;
+    background-color: transparent;
+}
+
+.nav-link.dropdown-toggle.color-jordan[aria-expanded="true"] {
+    color: #DC143C;
+}
+
 .color-jordan-form{
     color: #DC143C;
 }

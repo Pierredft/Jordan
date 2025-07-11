@@ -1,24 +1,38 @@
 <nav class="navbar navbar-expand-lg bg-jordan">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{ path('app_home')}}"><img class="logo" src="../images/logo/logo.svg" alt=""></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link color-jordan" aria-current="page" href="{{ path ('app_home')}}">Acceuil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link color-jordan" href="#">Vêtements</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link color-jordan" href="#">Chassures</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link color-jordan" aria-disabled="true">Sport</a>
-        </li>
-      </ul>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ path('app_home')}}"><img class="logo" src="../images/logo/logo.svg" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav"    aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link color-jordan" aria-current="page" href="{{ path ('app_home')}}">Acceuil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-jordan" href="#">Vêtements</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-jordan" href="#">Chassures</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link color-jordan" aria-disabled="true">Sport</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle color-jordan" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end color-jordan">
+                        <li><a class="dropdown-item" href="{{ path ('app_register')}}">Inscription</a></li>
+                        <li><a class="dropdown-item" href="{{ path ('app_login')}}">Connexion</a></li>
+                        {% if is_granted('ROLE_USER') %}
+                        <li><a class="dropdown-item" href="{{ path ('app_logout')}}">Déconnexion</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>
