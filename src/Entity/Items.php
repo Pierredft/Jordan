@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\StyleRepository;
+use App\Repository\ItemsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: StyleRepository::class)]
-class Style
+#[ORM\Entity(repositoryClass: ItemsRepository::class)]
+class Items
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,17 +16,17 @@ class Style
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $title = null;
+    private ?string $nom = null;
 
     public function __toString(): string
     {
-        return $this->title;
+        return $this->nom;
     }
 
     /**
      * @var Collection<int, Product>
      */
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'style', orphanRemoval: true)]
+    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'items', orphanRemoval: true)]
     private Collection $products;
 
     public function __construct()
@@ -39,14 +39,14 @@ class Style
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    public function getNom(): ?string
     {
-        return $this->title;
+        return $this->nom;
     }
 
-    public function setTitle(string $title): static
+    public function setNom(string $nom): static
     {
-        $this->title = $title;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -63,7 +63,7 @@ class Style
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
-            $product->setStyle($this);
+            $product->setItems($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class Style
     {
         if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getStyle() === $this) {
-                $product->setStyle(null);
+            if ($product->getItems() === $this) {
+                $product->setItems(null);
             }
         }
 
