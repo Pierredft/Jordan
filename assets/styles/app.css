@@ -12,6 +12,11 @@
     color: #fff;
 }
 
+.btn-jordan:hover{
+    background-color: #50C878;
+    color: #FFFFFF;
+}
+
 .border-jordan{
     border-color: #DC143C;
     border-radius: 30px;

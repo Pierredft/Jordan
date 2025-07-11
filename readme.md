@@ -9,6 +9,11 @@ Mais tu trouvera un fichier 10-MailerGmail qui est une de tes futurs doc, elle p
 
 # ATTENTION T'INSPIRER NE VEUX PAS DIRE TOUT COPIER
 
+# REMERBER ME
+Dans mon template de connexion, j'ai un boutton "ce souvenir", si tu veux qu'il soit fonctionnel tu dois faire une modification dans le fichier "security.yaml"
+tu pourra te rendre sur la doc suivante pour voir ce que tu doit modifier
+https://symfony.com/doc/current/security/remember_me.html
+
 
 
 # Bundle security register-form
