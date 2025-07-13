@@ -3,5 +3,53 @@
 {% block title %}Jordan - Acceuil{% endblock %}
 
 {% block body %}
+<video class="mt-2" src="{{ asset('video/pub.mov') }}" style="width: 100%;" autoplay loop muted playsinline></video>
+
+<div class="promo-section">
+    <h1 class="text-center fs-1 promo-title">Nos promotions</h1>
+    <div id="carouselExample" class="carousel slide promo-carousel" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% set first = true %}
+            {% set salesProducts = products|filter(p => p.sales == 1) %}
+            {% for chunk in salesProducts|batch(4) %}
+                <div class="carousel-item{% if first %} active{% endif %}">
+                    <div class="row justify-content-center">
+                        {% for product in chunk %}
+                            <div class="col-md-3">
+                                <div class="card promo-card">
+                                    <div class="promo-badge">Promo</div>
+                                    <img src="{{ product.picture }}" class="promo-card-img" alt="Image du produit">
+                                    <div class="promo-card-body">
+                                        <h5 class="promo-card-title">{{ product.name }}</h5>
+                                        <div class="price-container">
+                                            <span class="sale-price">{{ product.price }}€</span>
+                                            <span class="new-price">{{ product.salePrice }}€</span>
+                                        </div>
+                                        <a href="#" class="promo-btn">Voir le produit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% set first = false %}
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+
+
+
+
+
 
 {% endblock %}
