@@ -11,7 +11,7 @@ final class VetementsController extends AbstractController
     #[Route('/vetements', name: 'app_vetements')]
     public function index(): Response
     {
-        return $this->render('vetements/chaussures.html.twig', [
+        return $this->render('vetements/vetements.html.twig', [
             'controller_name' => 'VetementsController',
         ]);
     }

@@ -8,10 +8,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class ChassuresController extends AbstractController
 {
-    #[Route('/chassures', name: 'app_chassures')]
+    #[Route('/chaussures', name: 'app_chaussures')]
     public function index(): Response
     {
-        return $this->render('chassures/chassures.html.twig', [
+        return $this->render('chaussures/chaussures.html.twig', [
             'controller_name' => 'ChassuresController',
         ]);
     }

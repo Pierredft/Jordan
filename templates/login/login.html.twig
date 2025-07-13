@@ -5,7 +5,9 @@
 {% block body %}
     <form method="post">
         {% if error %}
-            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            <div class="alert alert-danger">Aucun compte n'a était trouver.
+            <a class="ms-2" href="{{path ('app_register')}}">Inscriver vous</a>
+            </div>
         {% endif %}
 
         {% if app.user %}
