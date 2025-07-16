@@ -3,45 +3,23 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+    <h1>Nos produits! Votre style!</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Picture</th>
-                <th>Quantity</th>
-                <th>Sales</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>SalePrice</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
         {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.name }}</td>
-                <td>{{ product.picture }}</td>
-                <td>{{ product.quantity }}</td>
-                <td>{{ product.sales ? 'Yes' : 'No' }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.salePrice }}</td>
-                <td>
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('app_product_edit', {'id': product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
+            <div class="card" style="width: 18rem;">
+                <img src="{{ product.picture }}" class="card-img-top" alt="{{ product.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.name }}</h5>
+                    {% if product.sales == 1 %}
+                        <p>{{product.price}} €</p>
+                        <p>{{product.salePrice}} €</p>
+                    {% endif %}
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">Voir le produit</a>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_product_new') }}">Create new</a>
+
+
+
 {% endblock %}
