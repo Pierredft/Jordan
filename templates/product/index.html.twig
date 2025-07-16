@@ -3,21 +3,30 @@
 {% block title %}Product index{% endblock %}
 
 {% block body %}
-    <h1>Nos produits! Votre style!</h1>
+    <h1 class="products-title">Nos produits! Votre style!</h1>
 
+    <div class="products-container">
         {% for product in products %}
-            <div class="card" style="width: 18rem;">
-                <img src="{{ product.picture }}" class="card-img-top" alt="{{ product.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
+            <div class="product-card">
+                {% if product.sales == 1 %}
+                    <div class="product-sale-badge">Promo</div>
+                {% endif %}
+                <img src="{{ product.picture }}" alt="{{ product.name }}">
+                <div class="product-card-body">
+                    <h5 class="product-card-title">{{ product.name }}</h5>
                     {% if product.sales == 1 %}
-                        <p>{{product.price}} €</p>
-                        <p>{{product.salePrice}} €</p>
+                        <div class="d-flex flex-row justify-content-between align-items-center">
+                            <p class="product-original-price">{{ product.price }} €</p>
+                            <p class="product-sale-price">{{ product.salePrice }} €</p>
+                        </div>
+                    {% else %}
+                        <p class="product-price">{{ product.price }} €</p>
                     {% endif %}
-                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="btn btn-primary">Voir le produit</a>
+                    <a href="{{ path('app_product_show', {'id': product.id}) }}" class="product-btn">Voir le produit</a>
                 </div>
             </div>
         {% endfor %}
+    </div>
 
 
 
