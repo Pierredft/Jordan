@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Panier{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/cart.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="cart-container">
+        <div class="container">
+            <h1 class="cart-title">
+                <i class="fas fa-shopping-cart me-3"></i>Mon Panier Jordan
+            </h1>
+
+            {% if cartItems is empty %}
+                <div class="cart-empty">
+                    <i class="fas fa-basketball-ball"></i>
+                    <h3>Votre panier est vide</h3>
+                    <p class="mb-4">Découvrez notre collection exclusive Jordan</p>
+                    <a href="{{ path('app_product_index') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-arrow-left me-2"></i>Explorer les produits
+                    </a>
+                </div>
+            {% else %}
+                <div class="cart-items">
+                    {% for item in cartItems %}
+                        {% set price = item.product.sales == 1 ? item.product.salePrice : item.product.price %}
+                        <div class="cart-item">
+                            <div class="row align-items-center">
+                                <div class="col-md-5">
+                                    <div class="d-flex align-items-center">
+                                        {% if item.product.picture starts with 'http' %}
+                                            <img src="{{ item.product.picture }}" alt="{{ item.product.name }}" class="product-image me-3">
+                                        {% else %}
+                                            <img src="{{ asset('images/product/' ~ item.product.picture) }}" alt="{{ item.product.name }}" class="product-image me-3">
+                                        {% endif %}
+                                        <div class="product-info">
+                                            <h5>{{ item.product.name }}</h5>
+                                            {% if item.product.sales == 1 %}
+                                                <span class="promotion-badge">
+                                                    <i class="fas fa-fire me-1"></i>En promotion
+                                                </span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 text-center">
+                                    <div class="price-display">{{ price }} €</div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="quantity-controls">
+                                        <form action="{{ path('app_cart_update', {'id': item.id}) }}" method="post" class="quantity-form">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <button type="button" class="quantity-btn" onclick="decrementQuantity(this)">
+                                                    <i class="fas fa-minus"></i>
+                                                </button>
+                                                <input type="number"
+                                                       name="quantity"
+                                                       value="{{ item.quantity }}"
+                                                       min="1"
+                                                       max="{{ item.quantity + item.product.quantity }}"
+                                                       class="quantity-input"
+                                                       onchange="this.form.submit()">
+                                                <button type="button" class="quantity-btn" onclick="incrementQuantity(this)">
+                                                    <i class="fas fa-plus"></i>
+                                                </button>
+                                            </div>
+                                            <div class="stock-info text-center">
+                                                Stock: {{ item.quantity + item.product.quantity }}
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-1 text-center">
+                                    <div class="total-display">{{ (price * item.quantity)|number_format(2, ',', ' ') }} €</div>
+                                </div>
+
+                                <div class="col-md-1 text-center">
+                                    <form action="{{ path('app_cart_remove', {'id': item.id}) }}" method="post" class="d-inline">
+                                        <button type="submit" class="remove-btn" onclick="return confirm('Êtes-vous sûr de vouloir retirer ce produit ?')">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+
+                <div class="cart-summary">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h3 class="mb-0 text-white">
+                                <i class="fas fa-calculator me-2"></i>Total de votre commande
+                            </h3>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <div class="cart-total">{{ total|number_format(2, ',', ' ') }} €</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cart-actions">
+                    <a href="{{ path('app_product_index') }}" class="btn-continue">
+                        <i class="fas fa-arrow-left me-2"></i>Continuer mes achats
+                    </a>
+                    <button class="btn-checkout">
+                        <i class="fas fa-credit-card me-2"></i>Procéder au paiement
+                    </button>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function incrementQuantity(button) {
+            const input = button.parentElement.querySelector('.quantity-input');
+            const max = parseInt(input.getAttribute('max'));
+            const current = parseInt(input.value);
+
+            if (current < max) {
+                input.value = current + 1;
+                input.form.submit();
+            }
+        }
+
+        function decrementQuantity(button) {
+            const input = button.parentElement.querySelector('.quantity-input');
+            const min = parseInt(input.getAttribute('min'));
+            const current = parseInt(input.value);
+
+            if (current > min) {
+                input.value = current - 1;
+                input.form.submit();
+            }
+        }
+    </script>
+{% endblock %}
