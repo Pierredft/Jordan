@@ -1,4 +1,5 @@
 import './bootstrap.js';
+import './js/btnQunatity.js';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -8,5 +9,6 @@ import './bootstrap.js';
 import './styles/app.css';
 import './styles/productHome.css';
 import './styles/product.css';
+import './styles/productShow.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
