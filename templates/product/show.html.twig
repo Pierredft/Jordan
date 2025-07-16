@@ -12,7 +12,11 @@
     <div class="product-layout">
         <!-- Section Image -->
         <div class="product-image-section">
-            <img src="{{ product.picture }}" alt="{{ product.name }}" class="product-image">
+            {% if product.picture starts with 'http' %}
+                <img src="{{ product.picture }}" alt="{{ product.name }}" class="product-image">
+            {% else %}
+                <img src="{{ asset('images/product/' ~ product.picture) }}" alt="{{ product.name }}" class="product-image">
+            {% endif %}
         </div>
 
         <!-- Section Détails -->

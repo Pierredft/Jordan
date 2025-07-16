@@ -11,7 +11,11 @@
                 {% if product.sales == 1 %}
                     <div class="product-sale-badge">Promo</div>
                 {% endif %}
+                {% if product.picture starts with 'http' %}
                 <img src="{{ product.picture }}" alt="{{ product.name }}">
+                {% else %}
+                <img src="{{ asset('images/product/' ~ product.picture) }}" alt="{{ product.name }}">
+                {% endif %}
                 <div class="product-card-body">
                     <h5 class="product-card-title">{{ product.name }}</h5>
                     {% if product.sales == 1 %}
