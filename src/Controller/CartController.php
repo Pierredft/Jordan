@@ -59,7 +59,7 @@ class CartController extends AbstractController
         return $this->redirectToRoute('app_product_show', ['id' => $product->getId()]);
     }
 
-    #[Route('/', name: 'app_cart_index')]
+    #[Route('/', name: 'app_cart')]
     public function index(CartRepository $cartRepository): Response
     {
         $user = $this->getUser();
