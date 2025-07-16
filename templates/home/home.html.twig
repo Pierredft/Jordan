@@ -18,7 +18,11 @@
                             <div class="col-md-3">
                                 <div class="card promo-card">
                                     <div class="promo-badge">Promo</div>
+                                    {% if product.picture starts with 'http' %}
                                     <img src="{{ product.picture }}" class="promo-card-img" alt="Image du produit">
+                                    {% else %}
+                                    <img src="{{ asset('images/product/' ~ product.picture) }}" class="promo-card-img" alt="Image du produit">
+                                    {% endif %}
                                     <div class="promo-card-body">
                                         <h5 class="promo-card-title">{{ product.name }}</h5>
                                         <div class="price-container">
