@@ -1,11 +1,68 @@
-<h1>Bienvue dans notre shop AirJordan</h1>
+<div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+    <!-- Header avec logo -->
+    <div style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); padding: 30px 20px; text-align: center; position: relative;">
+        <img src="cid:logo@domain.com" alt="Logo" style="height: 80px; margin-bottom: 20px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
+        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\"><circle cx=\"20\" cy=\"20\" r=\"2\" fill=\"%23ffffff\" opacity=\"0.1\"/><circle cx=\"80\" cy=\"40\" r=\"1\" fill=\"%23ffffff\" opacity=\"0.1\"/><circle cx=\"40\" cy=\"80\" r=\"1.5\" fill=\"%23ffffff\" opacity=\"0.1\"/></svg>'); pointer-events: none;"></div>
+    </div>
 
-<p>
-    Merci de confirmer votre mail en cliquant sur le lien suivant : <br><br>
-    <a href="{{ signedUrl|raw }}">Confirmer votre Email</a>.
-    Ce lien expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
-</p>
+    <!-- Contenu principal -->
+    <div style="padding: 40px 30px;">
+        <h1 style="font-size: 32px; font-weight: bold; text-align: center; margin: 0 0 30px 0; background: linear-gradient(45deg, #ff6b6b, #ffa726); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
+            Bienvenue dans notre shop AirJordan ! 🏀
+        </h1>
 
-<p>
-    Cordialement,
-</p>
+        <p style="font-size: 18px; line-height: 1.6; text-align: center; margin-bottom: 25px; color: #e0e0e0;">
+            Merci de vous être inscrit ! Il ne vous reste plus qu'une étape pour accéder à nos produits exclusifs.
+        </p>
+
+        <!-- Bouton de confirmation stylisé -->
+        <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); padding: 30px; margin: 30px 0; text-align: center; border-radius: 15px; position: relative; box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3); border: 2px solid #ff8a80;">
+            <div style="position: absolute; top: -10px; left: 20px; background: #000000; color: #ff6b6b; padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: bold; letter-spacing: 1px;">
+                CONFIRMATION
+            </div>
+
+            <h2 style="color: #ffffff; font-size: 24px; font-weight: bold; margin: 20px 0 25px 0; text-shadow: 0 2px 4px rgba(0,0,0,0.4);">
+                🔐 Confirmez votre email
+            </h2>
+
+            <a href="{{ signedUrl|raw }}" style=" display: inline-block; background: #ffffff; color: #ff6b6b; padding: 15px 40px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all 0.3s ease; border: 2px solid #ffffff;">
+                ✅ Confirmer mon Email
+            </a>
+
+            <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin-top: 25px;">
+                <p style="margin: 0; font-size: 14px; color: #ffcccc; line-height: 1.4;">
+                    ⏰ Ce lien expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}
+                </p>
+            </div>
+        </div>
+
+        <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 10px; margin: 30px 0; border-left: 4px solid #ff6b6b;">
+            <p style="font-size: 16px; line-height: 1.6; margin: 0 0 15px 0; color: #ffffff; font-weight: 500;">
+                🚀 Une fois votre email confirmé, vous pourrez :
+            </p>
+
+            <ul style="color: #cccccc; margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Accéder à nos collections exclusives</li>
+                <li style="margin-bottom: 8px;">Recevoir nos offres spéciales</li>
+                <li style="margin-bottom: 8px;">Profiter de vos codes promo personnalisés</li>
+            </ul>
+        </div>
+
+        <p style="font-size: 14px; color: #999999; text-align: center; margin: 30px 0 0 0; font-style: italic;">
+            💡 Si vous n'arrivez pas à cliquer sur le bouton, copiez et collez ce lien dans votre navigateur :<br>
+            <span style="color: #ff6b6b; word-break: break-all;">{{ signedUrl|raw }}</span>
+        </p>
+    </div>
+
+    <!-- Footer -->
+    <div style="background: linear-gradient(45deg, #2c2c2c, #1a1a1a); padding: 25px 30px; text-align: center; border-top: 2px solid #ff6b6b;">
+        <p style="font-size: 18px; font-weight: bold; margin: 0 0 10px 0; color: #ff6b6b;">
+            Merci de nous rejoindre ! 🙌
+        </p>
+
+        <p style="font-size: 14px; color: #999999; margin: 0;">
+            Cordialement,<br>
+            L'équipe AirJordan
+        </p>
+    </div>
+</div>

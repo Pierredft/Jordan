@@ -45,13 +45,21 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('pierredefauquet@gmail.com', 'JordanPierre'))
-                    ->to((string) $user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
+            $email = (new TemplatedEmail())
+                ->from(new Address('pierredefauquet@gmail.com', 'JordanPierre'))
+                ->to((string) $user->getEmail())
+                ->subject('Please Confirm your Email')
+                ->htmlTemplate('registration/confirmation_email.html.twig');
+
+            $logoPath = $this->getParameter('kernel.project_dir') . '/public/images/logo/logo.svg';
+            if (file_exists($logoPath)) {
+                $logo = new DataPart(new File($logoPath), 'logo', 'image/svg+xml');
+                $logo->asInline();
+                $logo->setContentId('logo@domain.com');
+                $email->addPart($logo);
+            }
+
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user, $email);
 
             // do anything else you need here, like send an email
 
