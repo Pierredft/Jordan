@@ -3,17 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegistrationFormType;
+use App\Entity\PromoCode;
 use App\Security\EmailVerifier;
+use App\Form\RegistrationFormType;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -60,8 +62,9 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    public function verifyUserEmail(Request $request, TranslatorInterface $translator, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
+
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         // validate email confirmation link, sets User::isVerified=true and persists
@@ -75,9 +78,29 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        if ($user->isVerified()) {
+            $promoCode = $em->getRepository(PromoCode::class)->findOneBy(['name' => 'welcome']);
+            if ($promoCode) {
+                $email = (new TemplatedEmail())
+                    ->from(new Address('pierredefauquet@gmail.com', 'JordanPierre'))
+                    ->to((string) $user->getEmail())
+                    ->subject('Welcome to our platform!')
+                    ->htmlTemplate('promo/welcome.html.twig')
+                    ->context([
+                        'promoCode' => $promoCode,
+                        'userEmail' => $user->getEmail()
+                    ]);
 
-        return $this->redirectToRoute('app_home');
+                $mailer->send($email);
+            }
+
+            // @TODO Change the redirect on success and handle or remove the flash message in your templates
+            $this->addFlash('success', 'Your email address has been verified.');
+
+            return $this->redirectToRoute('app_home');
+        }
+
+        // Ensure all code paths return a value
+        return $this->redirectToRoute('app_register');
     }
 }

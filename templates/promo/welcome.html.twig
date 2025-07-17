@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Email de bienvenue{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue !</h1>
+
+    <p>Félicitations ! Votre compte a été vérifié avec succès.</p>
+
+    <p>Pour vous remercier de votre inscription, voici un code promo spécial :</p>
+
+    <div style="background-color: #f0f0f0; padding: 20px; margin: 20px 0; text-align: center;">
+        <h2 style="color: #333;">{{ promoCode.code }}</h2>
+    </div>
+
+    <p>Utilisez ce code lors de votre prochaine commande pour bénéficier de votre réduction !</p>
+
+    <p>Merci de nous avoir rejoints !</p>
+
+{% endblock %}
