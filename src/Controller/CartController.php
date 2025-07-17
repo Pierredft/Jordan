@@ -5,10 +5,12 @@ namespace App\Controller;
 use App\Entity\Cart;
 use App\Entity\Product;
 use App\Repository\CartRepository;
+use App\Repository\PromoCodeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -60,23 +62,36 @@ class CartController extends AbstractController
     }
 
     #[Route('/', name: 'app_cart')]
-    public function index(CartRepository $cartRepository): Response
+    public function index(CartRepository $cartRepository, SessionInterface $session): Response
     {
         $user = $this->getUser();
         $cartItems = $cartRepository->findCartByUser($user);
 
-        $total = 0;
+        $subtotal = 0;
         foreach ($cartItems as $item) {
             // Utiliser la même logique que dans le template
             $price = $item->getProduct()->sales == 1 ?
                 $item->getProduct()->getSalePrice() :
                 $item->getProduct()->getPrice();
-            $total += $price * $item->getQuantity();
+            $subtotal += $price * $item->getQuantity();
+        }
+
+        // Récupérer le code promo de la session
+        $appliedPromoCode = $session->get('applied_promo_code');
+        $discount = 0;
+        $total = $subtotal;
+
+        if ($appliedPromoCode) {
+            $discount = ($subtotal * $appliedPromoCode['discount']) / 100;
+            $total = $subtotal - $discount;
         }
 
         return $this->render('cart/index.html.twig', [
             'cartItems' => $cartItems,
+            'subtotal' => $subtotal,
             'total' => $total,
+            'appliedPromoCode' => $appliedPromoCode,
+            'discount' => $discount,
         ]);
     }
 
@@ -94,7 +109,7 @@ class CartController extends AbstractController
         if ($quantityDifference > 0) {
             if ($product->getQuantity() < $quantityDifference) {
                 $this->addFlash('error', 'Stock insuffisant pour cette quantité.');
-                return $this->redirectToRoute('app_cart_index');
+                return $this->redirectToRoute('app_cart');
             }
             // Décrémenter le stock
             $product->setQuantity($product->getQuantity() - $quantityDifference);
@@ -111,7 +126,7 @@ class CartController extends AbstractController
 
         $this->addFlash('success', 'Quantité mise à jour avec succès!');
 
-        return $this->redirectToRoute('app_cart_index');
+        return $this->redirectToRoute('app_cart');
     }
 
     #[Route('/remove/{id}', name: 'app_cart_remove', methods: ['POST'])]
@@ -126,6 +141,44 @@ class CartController extends AbstractController
 
         $this->addFlash('success', 'Produit retiré du panier.');
 
-        return $this->redirectToRoute('app_cart_index');
+        return $this->redirectToRoute('app_cart');
+    }
+
+    #[Route('/apply-promo', name: 'app_cart_apply_promo', methods: ['POST'])]
+    public function applyPromoCode(Request $request, PromoCodeRepository $promoCodeRepository, SessionInterface $session): Response
+    {
+        $promoCodeValue = $request->request->get('promo_code');
+
+        if (empty($promoCodeValue)) {
+            $this->addFlash('error', 'Veuillez entrer un code promo.');
+            return $this->redirectToRoute('app_cart');
+        }
+
+        $promoCode = $promoCodeRepository->findOneByCode($promoCodeValue);
+
+        if (!$promoCode) {
+            $this->addFlash('error', 'Code promo invalide.');
+            return $this->redirectToRoute('app_cart');
+        }
+
+        // Stocker les informations du code promo en session
+        $session->set('applied_promo_code', [
+            'code' => $promoCode->getCode(),
+            'name' => $promoCode->getName(),
+            'discount' => $promoCode->getDiscount()
+        ]);
+
+        $this->addFlash('success', 'Code promo "' . $promoCode->getCode() . '" appliqué avec succès ! Remise de ' . $promoCode->getDiscount() . '%.');
+
+        return $this->redirectToRoute('app_cart');
+    }
+
+    #[Route('/remove-promo', name: 'app_cart_remove_promo', methods: ['POST'])]
+    public function removePromoCode(SessionInterface $session): Response
+    {
+        $session->remove('applied_promo_code');
+        $this->addFlash('success', 'Code promo supprimé.');
+
+        return $this->redirectToRoute('app_cart');
     }
 }

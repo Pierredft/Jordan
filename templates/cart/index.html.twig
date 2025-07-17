@@ -58,13 +58,7 @@
                                                 <button type="button" class="quantity-btn" onclick="decrementQuantity(this)">
                                                     <i class="fas fa-minus"></i>
                                                 </button>
-                                                <input type="number"
-                                                       name="quantity"
-                                                       value="{{ item.quantity }}"
-                                                       min="1"
-                                                       max="{{ item.quantity + item.product.quantity }}"
-                                                       class="quantity-input"
-                                                       onchange="this.form.submit()">
+                                                <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.quantity + item.product.quantity }}" class="quantity-input" onchange="this.form.submit()">
                                                 <button type="button" class="quantity-btn" onclick="incrementQuantity(this)">
                                                     <i class="fas fa-plus"></i>
                                                 </button>
@@ -92,7 +86,55 @@
                     {% endfor %}
                 </div>
 
+                <div class="cart-discount">
+                    <h4 class="text-white">Code Promo</h4>
+
+                    {% if appliedPromoCode %}
+                        <div class="alert alert-success mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <strong>{{ appliedPromoCode.code }}</strong> - {{ appliedPromoCode.name }}
+                                    <br>
+                                    <small>Remise de {{ appliedPromoCode.discount }}%</small>
+                                </div>
+                                <form action="{{ path('app_cart_remove_promo') }}" method="post" class="d-inline">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-times"></i> Supprimer
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    {% else %}
+                        <p class="text-muted">Entrez votre code promo ci-dessous :</p>
+                        <form action="{{ path('app_cart_apply_promo') }}" method="post" class="d-flex">
+                            <input type="text" name="promo_code" class="form-control me-2" placeholder="Votre code promo" required>
+                            <button type="submit" class="btn btn-primary">Appliquer</button>
+                        </form>
+                    {% endif %}
+                </div>
+
                 <div class="cart-summary">
+                    {% if appliedPromoCode %}
+                        <div class="row align-items-center mb-2">
+                            <div class="col-md-8">
+                                <h5 class="mb-0 text-white">Sous-total</h5>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <div class="text-white">{{ subtotal|number_format(2, ',', ' ') }} €</div>
+                            </div>
+                        </div>
+                        <div class="row align-items-center mb-2">
+                            <div class="col-md-8">
+                                <h5 class="mb-0 text-success">
+                                    <i class="fas fa-tag me-2"></i>Remise ({{ appliedPromoCode.discount }}%)
+                                </h5>
+                            </div>
+                            <div class="col-md-4 text-end">
+                                <div class="text-success">-{{ discount|number_format(2, ',', ' ') }} €</div>
+                            </div>
+                        </div>
+                        <hr class="text-white">
+                    {% endif %}
                     <div class="row align-items-center">
                         <div class="col-md-8">
                             <h3 class="mb-0 text-white">
