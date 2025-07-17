@@ -1,20 +1,13 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Email de bienvenue{% endblock %}
-
-{% block body %}
 <div style="font-family: 'Arial', sans-serif; max-width: 600px; margin: 0 auto; background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%); color: #ffffff; border-radius: 10px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
     <!-- Header avec logo -->
-    <div style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); padding: 30px 20px; text-align: center; position: relative;">
+    <div style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); padding: 30px 20px; text-align: center;">
         <img src="cid:logo@domain.com" alt="Logo" style="height: 80px; margin-bottom: 20px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));">
-        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%222%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.1%22/%3E%3Ccircle%20cx%3D%2280%22%20cy%3D%2240%22%20r%3D%221%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.1%22/%3E%3Ccircle%20cx%3D%2240%22%20cy%3D%2280%22%20r%3D%221.5%22%20fill%3D%22%23ffffff%22%20opacity%3D%220.1%22/%3E%3C/svg%3E'); pointer-events: none;">
-        </div>
     </div>
 
     <!-- Contenu principal -->
     <div style="padding: 40px 30px;">
         <h1 style="font-size: 32px; font-weight: bold; text-align: center; margin: 0 0 30px 0; background: linear-gradient(45deg, #ff6b6b, #ffa726); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-shadow: 0 2px 4px rgba(0,0,0,0.3);">
-            Bienvenue {{user.email}} ! 🏀
+            Bienvenue {{ user.email is defined ? user.email : '' }} ! 🏀
         </h1>
         <p style="font-size: 18px; line-height: 1.6; text-align: center; margin-bottom: 25px; color: #e0e0e0;">
             Félicitations ! Votre compte a été vérifié avec succès.
@@ -31,12 +24,12 @@
             </div>
 
             <h2 style="color: #ffffff; font-size: 36px; font-weight: bold; margin: 20px 0 15px 0; letter-spacing: 3px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); font-family: 'Courier New', monospace;">
-                {{ promoCode.code }}
+                {{ promoCode.code is defined ? promoCode.code : '' }}
             </h2>
 
             <div style="background: rgba(255,255,255,0.2); padding: 15px; border-radius: 10px; margin-top: 20px;">
                 <p style="margin: 0; font-size: 18px; font-weight: bold; color: #ffffff;">
-                    🎯 {{promoCode.discount}}% de remise
+                    🎯 {{ promoCode.discount is defined ? promoCode.discount : '' }}% de remise
                 </p>
                 <p style="margin: 5px 0 0 0; font-size: 14px; color: #ffcccc;">
                     sur le total de votre commande
@@ -66,4 +59,3 @@
         </p>
     </div>
 </div>
-{% endblock %}
