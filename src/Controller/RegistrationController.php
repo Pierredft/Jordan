@@ -8,6 +8,8 @@ use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Part\DataPart;
+use Symfony\Component\Mime\Part\File;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
@@ -80,16 +82,26 @@ class RegistrationController extends AbstractController
 
         if ($user->isVerified()) {
             $promoCode = $em->getRepository(PromoCode::class)->findOneBy(['name' => 'welcome']);
+            $user = $em->getRepository(User::class)->find($user->getId());
             if ($promoCode) {
                 $email = (new TemplatedEmail())
                     ->from(new Address('pierredefauquet@gmail.com', 'JordanPierre'))
                     ->to((string) $user->getEmail())
-                    ->subject('Welcome to our platform!')
+                    ->subject('Bienvenue parmi nous !')
                     ->htmlTemplate('promo/welcome.html.twig')
                     ->context([
                         'promoCode' => $promoCode,
+                        'user' => $user,
                         'userEmail' => $user->getEmail()
                     ]);
+
+                $logoPath = $this->getParameter('kernel.project_dir') . '/public/images/logo/logo.svg';
+                if (file_exists($logoPath)) {
+                    $logo = new DataPart(new File($logoPath), 'logo', 'image/svg+xml');
+                    $logo->asInline();
+                    $logo->setContentId('logo@domain.com');
+                    $email->addPart($logo);
+                }
 
                 $mailer->send($email);
             }
