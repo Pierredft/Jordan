@@ -55,3 +55,6 @@
 .color-jordan-form{
     color: #DC143C;
 }
+
+/* Import footer styles */
+@import url('./footer.css');

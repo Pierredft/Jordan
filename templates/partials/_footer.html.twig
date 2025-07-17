@@ -1,0 +1,91 @@
+<footer class="footer-jordan mt-auto">
+    <div class="container-fluid">
+        <div class="row footer-content">
+            <!-- Logo et description -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <div class="footer-brand">
+                    <img src="../images/logo/logo.svg" alt="Jordan Logo" class="footer-logo">
+                    <p class="footer-description">
+                        Découvrez l'excellence des chaussures Jordan. Style, performance et innovation depuis 1985.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="footer-title">Navigation</h5>
+                <ul class="footer-links">
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
+                    <li><a href="{{ path('app_product_index') }}">Shop</a></li>
+                    <li><a href="{{ path('app_cart') }}">Panier</a></li>
+                </ul>
+            </div>
+
+            <!-- Catégories -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="footer-title">Catégories</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Air Jordan</a></li>
+                    <li><a href="#">Jordan Retro</a></li>
+                    <li><a href="#">Jordan 1</a></li>
+                    <li><a href="#">Nouveautés</a></li>
+                </ul>
+            </div>
+
+            <!-- Support -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h5 class="footer-title">Support</h5>
+                <ul class="footer-links">
+                    <li><a href="#">Aide</a></li>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Réseaux sociaux -->
+            <div class="col-lg-3 col-md-6 mb-4">
+                <h5 class="footer-title">Suivez-nous</h5>
+                <div class="footer-social">
+                    <a href="#" class="social-link">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-link">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+                <div class="newsletter mt-3">
+                    <p class="newsletter-text">Recevez nos dernières nouveautés</p>
+                    <div class="newsletter-form">
+                        <input type="email" class="form-control newsletter-input" placeholder="Votre email">
+                        <button class="btn btn-jordan newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer bottom -->
+        <div class="footer-bottom">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="copyright">&copy; {{ "now"|date("Y") }} Jordan Store. Tous droits réservés.</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="footer-bottom-links">
+                        <a href="#">Politique de confidentialité</a>
+                        <a href="#">Conditions d'utilisation</a>
+                        <a href="#">Mentions légales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
