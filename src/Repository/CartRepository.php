@@ -35,4 +35,16 @@ class CartRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getTotalQuantityByUser(User $user): int
+    {
+        $result = $this->createQueryBuilder('c')
+            ->select('SUM(c.quantity) as total')
+            ->andWhere('c.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return (int) ($result ?? 0);
+    }
 }

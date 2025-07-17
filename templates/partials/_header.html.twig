@@ -15,9 +15,17 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link color-jordan" href="{{ path ('app_cart') }}">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </a>
+                    <div class="me-3">
+                        <a class="nav-link color-jordan position-relative" href="{{ path ('app_cart') }}">
+                            <i id="cart-icon" class="fa-solid fa-cart-shopping"></i>
+                            {% if app.user and cart_quantity > 0 %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ cart_quantity }}
+                                    <span class="visually-hidden">articles dans le panier</span>
+                                </span>
+                            {% endif %}
+                        </a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle color-jordan" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
