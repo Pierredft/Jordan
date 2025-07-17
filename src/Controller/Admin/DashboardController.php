@@ -6,6 +6,7 @@ use App\Entity\Gender;
 use App\Entity\Items;
 use App\Entity\Product;
 use App\Entity\Style;
+use App\Entity\PromoCode;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -38,5 +39,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Style', 'fas fa-vest', Style::class);
         yield MenuItem::linkToCrud('Produit', 'fas fa-shoe-prints', Product::class);
         yield MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Items::class);
+        yield MenuItem::linkToCrud('Codes Promo', 'fas fa-tags', PromoCode::class);
     }
 }
