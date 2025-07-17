@@ -1,5 +1,5 @@
 import './bootstrap.js';
-import './js/btnQunatity.js';
+import './js/btnQuantity.js';
 /*
  * Welcome to your app's main JavaScript file!
  *

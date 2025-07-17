@@ -63,10 +63,13 @@
                 <div class="newsletter mt-3">
                     <p class="newsletter-text">Recevez nos dernières nouveautés</p>
                     <div class="newsletter-form">
-                        <input type="email" class="form-control newsletter-input" placeholder="Votre email">
-                        <button class="btn btn-jordan newsletter-btn">
-                            <i class="fas fa-paper-plane"></i>
-                        </button>
+                        <form action="{{ path('app_newsletter_subscribe') }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token('newsletter_subscription') }}">
+                            <input type="email" name="email" class="form-control newsletter-input" placeholder="Votre email" required>
+                            <button type="submit" class="btn btn-jordan newsletter-btn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
