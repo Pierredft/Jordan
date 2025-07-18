@@ -16,19 +16,9 @@
                 <h5 class="footer-title">Navigation</h5>
                 <ul class="footer-links">
                     <li><a href="{{ path('app_home') }}">Accueil</a></li>
-                    <li><a href="{{ path('app_product_index') }}">Shop</a></li>
+                    <li><a href="{{ path('app_product_index') }}">Catalogue</a></li>
                     <li><a href="{{ path('app_cart') }}">Panier</a></li>
-                </ul>
-            </div>
-
-            <!-- Catégories -->
-            <div class="col-lg-2 col-md-6 mb-4">
-                <h5 class="footer-title">Catégories</h5>
-                <ul class="footer-links">
-                    <li><a href="#">Air Jordan</a></li>
-                    <li><a href="#">Jordan Retro</a></li>
-                    <li><a href="#">Jordan 1</a></li>
-                    <li><a href="#">Nouveautés</a></li>
+                    <li><a href="#">Promotions</a></li>
                 </ul>
             </div>
 
@@ -36,40 +26,55 @@
             <div class="col-lg-2 col-md-6 mb-4">
                 <h5 class="footer-title">Support</h5>
                 <ul class="footer-links">
-                    <li><a href="#">Aide</a></li>
-                    <li><a href="#">Livraison</a></li>
-                    <li><a href="#">Retours</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Centre d'aide</a></li>
+                    <li><a href="#">Livraison & Retours</a></li>
+                    <li><a href="#">Guide des tailles</a></li>
+                    <li><a href="#">Nous contacter</a></li>
                 </ul>
             </div>
 
-            <!-- Réseaux sociaux -->
-            <div class="col-lg-3 col-md-6 mb-4">
-                <h5 class="footer-title">Suivez-nous</h5>
-                <div class="footer-social">
-                    <a href="#" class="social-link">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                    <a href="#" class="social-link">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                </div>
-                <div class="newsletter mt-3">
-                    <p class="newsletter-text">Recevez nos dernières nouveautés</p>
-                    <div class="newsletter-form">
-                        <form action="{{ path('app_newsletter_subscribe') }}" method="post">
-                            <input type="hidden" name="_token" value="{{ csrf_token('newsletter_subscription') }}">
-                            <input type="email" name="email" class="form-control newsletter-input" placeholder="Votre email" required>
-                            <button type="submit" class="btn btn-jordan newsletter-btn">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
+            <!-- Réseaux sociaux et Newsletter -->
+            <div class="col-lg-5 col-md-12 mb-4">
+                <div class="row">
+                    <!-- Réseaux sociaux -->
+                    <div class="col-md-6 mb-3">
+                        <h5 class="footer-title">Suivez-nous</h5>
+                        <div class="footer-social">
+                            <a href="#" class="social-link" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-link" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-link" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-link" title="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div class="col-md-6">
+                        <h5 class="footer-title">Newsletter</h5>
+                        <div class="newsletter">
+                            <p class="newsletter-text">Recevez nos dernières nouveautés et offres exclusives</p>
+                            <div class="newsletter-form">
+                                <form action="{{ path('app_newsletter_subscribe') }}" method="post" class="d-flex gap-2 align-items-stretch">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('newsletter_subscription') }}">
+                                    <input type="email" name="email" class="form-control newsletter-input" placeholder="Votre email" required>
+                                    <button type="submit" class="btn btn-jordan newsletter-btn" title="S'abonner">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </form>
+                            </div>
+                            <div class="newsletter-unsubscribe">
+                                <a href="#" class="text-decoration-none">
+                                    Se désabonner de la newsletter
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

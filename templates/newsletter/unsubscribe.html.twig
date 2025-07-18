@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se désabonner de la newsletter - Jordan Store{% endblock %}
+
+{% block body %}
+<div class="container-fluid py-5" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); min-height: 60vh;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0" style="border-radius: 15px;">
+                    <div class="card-header bg-dark text-white text-center" style="border-radius: 15px 15px 0 0;">
+                        <h2 class="mb-0">
+                            <i class="fas fa-envelope-open-text text-danger me-2"></i>
+                            Désabonnement Newsletter
+                        </h2>
+                    </div>
+                    <div class="card-body p-5">
+                        {% for message in app.flashes('success') %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fas fa-check-circle me-2"></i>{{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+
+                        {% for message in app.flashes('error') %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <i class="fas fa-exclamation-circle me-2"></i>{{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+
+                        {% for message in app.flashes('warning') %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <i class="fas fa-exclamation-triangle me-2"></i>{{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                            </div>
+                        {% endfor %}
+
+                        <div class="text-center mb-4">
+                            <p class="text-muted">
+                                Nous sommes désolés de vous voir partir. Saisissez votre adresse email pour vous désabonner de notre newsletter.
+                            </p>
+                        </div>
+
+                        <form action="{{ path('app_newsletter_unsubscribe') }}" method="post">
+                            <input type="hidden" name="_token" value="{{ csrf_token('newsletter_unsubscription') }}">
+
+                            <div class="mb-4">
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-envelope me-2 text-danger"></i>Adresse email
+                                </label>
+                                <input type="email"
+                                       class="form-control form-control-lg"
+                                       id="email"
+                                       name="email"
+                                       placeholder="votre@email.com"
+                                       required
+                                       style="border-radius: 10px; border: 2px solid #e9ecef;">
+                            </div>
+
+                            <div class="d-grid gap-2">
+                                <button type="submit"
+                                        class="btn btn-danger btn-lg"
+                                        style="border-radius: 10px; background: linear-gradient(45deg, #DC143C, #FF1744);">
+                                    <i class="fas fa-unsubscribe me-2"></i>Se désabonner
+                                </button>
+
+                                <a href="{{ path('app_home') }}"
+                                   class="btn btn-outline-secondary"
+                                   style="border-radius: 10px;">
+                                    <i class="fas fa-arrow-left me-2"></i>Retour à l'accueil
+                                </a>
+                            </div>
+                        </form>
+
+                        <div class="text-center mt-4">
+                            <small class="text-muted">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Une fois désabonné(e), vous ne recevrez plus nos emails marketing.
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.form-control:focus {
+    border-color: #DC143C !important;
+    box-shadow: 0 0 0 0.2rem rgba(220, 20, 60, 0.25) !important;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+.card {
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+</style>
+{% endblock %}
