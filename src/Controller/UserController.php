@@ -18,7 +18,7 @@ final class UserController extends AbstractController
     #[Route(name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('user/index.html.twig', [
+        return $this->render('user/show.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
@@ -58,10 +58,10 @@ final class UserController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_user', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
             }
 
-            return $this->render('user/edit.html.twig', [
+            return $this->render('user/editAddress.html.twig', [
                 'user' => $user,
                 'form' => $form,
             ]);

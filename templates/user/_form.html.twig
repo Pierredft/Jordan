@@ -1,4 +1,36 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_start(form, {'attr': {'class': 'user-form'}}) }}
+    <div class="form-fields">
+        {% for field in form %}
+            {% if field.vars.name != '_token' %}
+                {% if field.vars.name == 'phoneCode' %}
+                    <div class="form-group">
+                        <label class="form-label">Numéro de téléphone :</label>
+                        <div class="phone-group d-flex">
+                            <div class="phone-code-container">
+                                {{ form_widget(form.phoneCode, {'attr': {'class': 'form-control border-jordan color-jordan-form phone-code'}}) }}
+                                {{ form_errors(form.phoneCode) }}
+                            </div>
+                            <div class="phone-number-container">
+                                {{ form_widget(form.phoneNumber, {'attr': {'class': 'form-control border-jordan color-jordan-form phone-number'}}) }}
+                                {{ form_errors(form.phoneNumber) }}
+                            </div>
+                        </div>
+                    </div>
+                {% elseif field.vars.name != 'phoneNumber' %}
+                    <div class="form-group">
+                        {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(field) }}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+    <button type="submit" class="btn-form-submit">
+        {% if button_label == 'Ajouter' %}
+            <i class="fas fa-plus"></i> {{ button_label|default('Enregistrer') }}
+        {% else %}
+            <i class="fas fa-save"></i> {{ button_label|default('Enregistrer') }}
+        {% endif %}
+    </button>
 {{ form_end(form) }}

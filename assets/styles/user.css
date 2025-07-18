@@ -216,3 +216,295 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* ===========================================
+   STYLES POUR LE FORMULAIRE D'ÉDITION JORDAN
+   =========================================== */
+
+/* Container principal du formulaire */
+.user-edit-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.user-edit-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 20%, rgba(220, 20, 60, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 70% 80%, rgba(80, 200, 120, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Titre de la page d'édition */
+.user-edit-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 10px rgba(220, 20, 60, 0.5);
+}
+
+.user-edit-title i {
+    color: #DC143C;
+    margin-right: 0.5rem;
+    text-shadow: 0 0 10px rgba(220, 20, 60, 0.8);
+}
+
+/* Carte du formulaire */
+.user-form-card {
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(220, 20, 60, 0.3);
+    border: 2px solid rgba(220, 20, 60, 0.2);
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.user-form-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #DC143C, #50C878, #DC143C);
+    border-radius: 22px;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Styles pour les champs de formulaire */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgba(220, 20, 60, 0.3);
+    border-radius: 30px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    color: #FFFFFF;
+    backdrop-filter: blur(5px);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #DC143C;
+    box-shadow: 0 0 0 3px rgba(220, 20, 60, 0.2),
+                0 0 20px rgba(220, 20, 60, 0.4);
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+    font-style: italic;
+}
+
+.form-control:not(:placeholder-shown) {
+    border-color: #50C878;
+    box-shadow: 0 0 0 2px rgba(80, 200, 120, 0.2);
+}
+
+/* Labels des champs */
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Bouton principal du formulaire */
+.btn-form-submit {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, #DC143C 0%, #50C878 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 1rem;
+    box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-form-submit::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.btn-form-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(220, 20, 60, 0.4);
+    background: linear-gradient(135deg, #50C878 0%, #DC143C 100%);
+}
+
+.btn-form-submit:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.btn-form-submit:active {
+    transform: translateY(0);
+}
+
+/* Lien de retour */
+.user-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    color: #FFFFFF;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.75rem 1.5rem;
+    border-radius: 30px;
+    background: rgba(220, 20, 60, 0.1);
+    border: 1px solid rgba(220, 20, 60, 0.3);
+}
+
+.user-back-link:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+    background: rgba(220, 20, 60, 0.2);
+    border-color: #DC143C;
+    transform: translateX(-5px);
+    box-shadow: 0 4px 15px rgba(220, 20, 60, 0.3);
+}
+
+.user-back-link i {
+    color: #DC143C;
+    transition: all 0.3s ease;
+}
+
+.user-back-link:hover i {
+    color: #50C878;
+}
+
+/* Messages d'erreur */
+.form-error {
+    color: #DC143C;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    display: block;
+    font-weight: 500;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Responsive pour le formulaire */
+@media (max-width: 768px) {
+    .user-edit-container {
+        padding: 1rem;
+    }
+
+    .user-form-card {
+        padding: 2rem;
+        margin: 1rem;
+    }
+
+    .user-edit-title {
+        font-size: 2rem;
+    }
+
+    .btn-form-submit {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Animation d'entrée */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.user-form-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Styles pour les champs de téléphone côte à côte */
+.phone-group {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.phone-code-container {
+    flex: 0 0 140px; /* Largeur fixe pour le code pays */
+}
+
+.phone-number-container {
+    flex: 1; /* Prend l'espace restant */
+}
+
+.phone-code {
+    width: 100% !important;
+    padding: 1rem 0.8rem !important;
+    font-size: 0.9rem !important;
+}
+
+.phone-number {
+    width: 100% !important;
+}
+
+/* Responsive pour les champs de téléphone */
+@media (max-width: 576px) {
+    .phone-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .phone-code-container {
+        flex: 1;
+    }
+
+    .phone-code {
+        width: 100% !important;
+        padding: 1rem !important;
+        font-size: 1rem !important;
+    }
+}

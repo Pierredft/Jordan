@@ -1,19 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Edit Address{% endblock %}
 
 {% block body %}
 <div class="user-edit-container">
     <div class="user-form-card">
         <h1 class="user-edit-title">
-            {% if form.name.vars.value is empty %}
-                <i class="fas fa-user-plus"></i> Ajouter un utilisateur
+            {% if form.city.vars.value is empty %}
+                <i class="fas fa-map-marker-alt"></i> Ajouter une adresse
             {% else %}
-                <i class="fas fa-user-edit"></i> Modifier mon profil
+                <i class="fas fa-edit"></i> Modifier mon adresse
             {% endif %}
         </h1>
 
-        {% if form.name.vars.value is empty %}
+        {% if form.city.vars.value is empty %}
             {{ include('user/_form.html.twig', {'button_label': 'Ajouter'}) }}
         {% else %}
             {{ include('user/_form.html.twig', {'button_label': 'Modifier'}) }}
