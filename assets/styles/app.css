@@ -119,3 +119,8 @@
 
 /* Import footer styles */
 @import url('./footer.css');
+
+/* Import user styles */
+@import url('./user.css');
+
+

@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte - Jordan{% endblock %}
+
+{% block body %}
+<div class="user-profile-container">
+    <div class="user-profile-header">
+        <h1 class="user-profile-title">
+            <i class="fas fa-user-circle"></i>
+            Mon Compte Jordan
+        </h1>
+        <div class="user-profile-subtitle">Gérez vos informations personnelles</div>
+    </div>
+
+    <div class="user-cards-container">
+        <!-- Carte informations personnelles -->
+        <div class="user-card personal-info">
+            <div class="user-card-header">
+                <i class="fas fa-user"></i>
+                <h3>Informations Personnelles</h3>
+            </div>
+            <div class="user-card-body">
+                <div class="info-group">
+                    <div class="info-item">
+                        <span class="info-label">Nom complet</span>
+                        <span class="info-value">{{user.name}} {{user.firstName}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Email</span>
+                        <span class="info-value">{{user.email}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Téléphone</span>
+                        <span class="info-value">{{user.phoneCode}}{{user.phoneNumber}}</span>
+                    </div>
+                </div>
+                <div class="user-card-footer">
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn-jordan-edit">
+                        <i class="fas fa-edit"></i>
+                        Modifier mes informations
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte adresse -->
+        <div class="user-card address-info">
+            <div class="user-card-header">
+                <i class="fas fa-map-marker-alt"></i>
+                <h3>Adresse</h3>
+            </div>
+            <div class="user-card-body">
+                <div class="info-group">
+                    <div class="info-item">
+                        <span class="info-label">Adresse</span>
+                        <span class="info-value">{{user.houseNumber}} {{user.extension}} {{user.street}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Lieu-dit</span>
+                        <span class="info-value">{{user.placeCalled}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Code postal</span>
+                        <span class="info-value">{{user.zipCode}} {{user.city}}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Pays</span>
+                        <span class="info-value">{{user.country}}</span>
+                    </div>
+                </div>
+                <div class="user-card-footer">
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="btn-jordan-edit">
+                        <i class="fas fa-edit"></i>
+                        Modifier l'adresse
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte actions rapides -->
+        <div class="user-card quick-actions">
+            <div class="user-card-header">
+                <i class="fas fa-bolt"></i>
+                <h3>Actions Rapides</h3>
+            </div>
+            <div class="user-card-body">
+                <div class="quick-actions-grid">
+                    <a href="#" class="quick-action-item">
+                        <i class="fas fa-shopping-bag"></i>
+                        <span>Mes Commandes</span>
+                    </a>
+                    <a href="#" class="quick-action-item">
+                        <i class="fas fa-heart"></i>
+                        <span>Favoris</span>
+                    </a>
+                    <a href="#" class="quick-action-item">
+                        <i class="fas fa-lock"></i>
+                        <span>Sécurité</span>
+                    </a>
+                    <a href="#" class="quick-action-item">
+                        <i class="fas fa-bell"></i>
+                        <span>Notifications</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
